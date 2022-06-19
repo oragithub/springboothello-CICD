@@ -15,21 +15,24 @@ spec:
         app: java
     spec:
       containers:
-      - name: java-deployment
+      - name: java
         image: 915969/springboohello:5
-        imagePullPolicy: Always
         ports:
-        - containerPort: 8091
+        - containerPort: 3000
+        
+        
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
   name: java
 spec:
-  type: LoadBalancer
   selector:
-    app: java
+    app: java 
+  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 8091
-      targetPort: 8091
+  - protocol: TCP
+    port: 5000
+    targetPort: 3000
+    nodePort: 31110
